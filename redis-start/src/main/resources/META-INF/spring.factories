@@ -1,0 +1,2 @@
+# 映射到Redis自动配置时的类
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.lq.redis.RedisAutoConfiguration

@@ -1,0 +1,70 @@
+
+#渲染jsp视图
+#spring.mvc.view.prefix=/WEB-INF/jsp/
+#spring.mvc.view.suffix=.jsp
+
+server:
+  port: 8889
+
+spring:
+    #热部署 restart
+    thymeleaf:
+      cache: false
+
+    # Redis
+    redis:
+      database: 0
+      host: localhost
+      port: 6379
+      timeout: 5000
+      password:
+
+    # RabbitMQ
+    rabbitmq:
+      host: localhost
+      port: 5672
+      username: guest
+      password: guest
+
+  # 数据源
+    datasource:
+        username: root
+        password: 123456
+        url: jdbc:mysql://localhost:3306/ssm?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+        driver-class-name: com.mysql.jdbc.Driver
+        # 使用druid数据源
+#        type: com.alibaba.druid.pool.DruidDataSource
+
+# 加载所有的端点/默认只加载了 info / health
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+## 该配置节点为独立的节点，如果将这个配置放在spring的节点下，导致配置无法被识别
+mybatis:
+  #注意：一定要对应mapper映射xml文件的所在路径(这里为resources下面的mapping路径下的后缀为xml的文件)
+  mapperLocations: classpath:mapping/*.xml
+  # 注意：对应实体类的包路径
+  type-aliases-package: com.lq.model
+
+
+#pagehelper分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+#日志
+logging:
+    level:
+        root: INFO
+        com:
+            lq:
+                controller: DEBUG
+                service: INFO
+                mapper: DEBUG
+    file: f:/springboot.log
+
